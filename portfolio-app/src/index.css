@@ -25,7 +25,7 @@ code {
   height: 12px;
   background: #00FFAB;
   border-radius: 50%;
-  pointer-events: none;
+  pointer-events: none !important;
   z-index: 9999;
   transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
   box-shadow: 0 0 15px #00FFAB;
@@ -37,7 +37,7 @@ code {
   height: 40px;
   border: 2px solid rgba(0, 255, 171, 0.3);
   border-radius: 50%;
-  pointer-events: none;
+  pointer-events: none !important;
   z-index: 9998;
   transition: all 0.1s ease;
 }

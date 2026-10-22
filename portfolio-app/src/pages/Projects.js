@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /* ─── Project Data ─────────────────────────────────────────────────── */
 const projects = [
@@ -8,31 +8,32 @@ const projects = [
     title: "HealthVerse",
     emoji: "🏥",
     badge: "Final Year Project",
-    badgeColor: "#FFD700",
+    badgeColor: "#00FFAB",
     category: "AI / Healthcare",
     description:
-      "AI-Powered Ophthalmology Platform connecting patients and eye-care specialists through AI triage, real-time consultations, digital prescriptions, and smart medication tracking.",
+      "A full-stack intelligent ophthalmology platform connecting patients and eye-care specialists through AI triage, real-time consultations, digital prescriptions, and smart medication tracking.",
     longDescription:
-      "A full-stack intelligent healthcare system for Pakistan that bridges patients and eye-care specialists. Features multilingual voice triage (Urdu/English/Roman Urdu), RAG-powered MCQ generation, real-time red flag detection, and a complete prescription-to-reminder pipeline.",
+      "HealthVerse is an intelligent healthcare platform designed specifically for ophthalmology. It bridges patients and eye-care specialists with AI pre-triage across multiple languages (English, Urdu, and Roman Urdu), intelligent doctor routing, real-time appointment booking via SignalR, an AI-assisted doctor dashboard in Blazor, and structured digital prescriptions with automated adherence tracking.",
     features: [
-      "Multilingual voice-to-text triage in Urdu, English & Roman Urdu",
-      "LangGraph ReAct AI agents with RAG (Qdrant) for ophthalmology triage",
-      "Real-time SignalR appointment notifications & doctor dashboard (Blazor)",
-      "Digital prescriptions with Gemini AI summaries, Cloudinary PDFs & FCM push",
-      "PMDC license verification + Stripe subscription gating for doctors",
-      "Flutter patient app with fl_chart adherence graphs & medication tracking",
+      "Multilingual voice-to-text intake in Urdu, English & Roman Urdu via Speechnotes API",
+      "LangGraph ReAct AI triage agent with Qdrant vector database (RAG) for ophthalmology cases",
+      "Interactive multi-round MCQ follow-up questions reaching >=85% diagnostic confidence",
+      "Real-time appointment alerts to doctors via SignalR and Stripe PKR payment integration",
+      "Doctor decision-support AI agents automatically scanning for 16 ophthalmic emergency red flags",
+      "Structured prescriptions with Google Gemini AI summaries & Cloudinary PDF delivery",
+      "Patient medication tracker with interactive adherence charts and push notifications via FCM",
+      "PMDC doctor license verification workflow with admin approval gating",
     ],
     techStack: [
       ".NET 8", "ASP.NET Core", "Flutter", "Blazor Server",
       "LangGraph", "FastAPI", "Python", "MongoDB Atlas",
-      "Qdrant", "Groq", "Gemini AI", "Stripe", "Firebase FCM",
-      "SignalR", "Cloudinary",
+      "Qdrant Cloud", "Groq", "Google Gemini AI", "Stripe",
+      "Firebase FCM", "SignalR", "Cloudinary",
     ],
     githubUrl: "https://github.com/syedmozamilshah/HealthVerse",
     liveUrl: "",
     accentColor: "#00FFAB",
-    glowColor: "rgba(0,255,171,0.3)",
-    icon: "🏥",
+    glowColor: "rgba(0,255,171,0.25)",
   },
   {
     id: 2,
@@ -42,27 +43,26 @@ const projects = [
     badgeColor: "#9B59B6",
     category: "AI / ML",
     description:
-      "End-to-end action recognition pipeline using CNN (ResNet50) + LSTM on the Stanford-40 dataset. ~85% test accuracy with a live REST API on Modal.com and a React frontend.",
+      "Image-based human action recognition system using a hybrid CNN (ResNet50) + LSTM architecture trained on the Stanford-40 dataset with ~85% test accuracy.",
     longDescription:
-      "Trained on 8 action classes from Stanford-40, this system extracts spatial features via ResNet50 transfer learning, then routes them through an LSTM for temporal classification. Deployed as a GPU-accelerated FastAPI on Modal.com.",
+      "An end-to-end deep learning pipeline that takes single-frame images, extracts high-dimensional spatial features using a pre-trained ResNet50 backbone (ImageNet weights), and models sequence dynamics via an LSTM layer to predict human actions. The model is deployed as a GPU-accelerated REST API on Modal.com with an interactive React frontend.",
     features: [
-      "ResNet50 + LSTM hybrid architecture — ~85% test accuracy",
-      "GPU-accelerated FastAPI deployed on Modal.com (NVIDIA T4)",
-      "Supports image upload, file, and base64 prediction endpoints",
-      "React frontend with live prediction & confidence scores",
-      "Early stopping + ReduceLROnPlateau training callbacks",
-      "8 action classes: running, climbing, reading, drinking & more",
+      "Hybrid ResNet50 + LSTM architecture achieving ~85% test accuracy across 8 Stanford-40 actions",
+      "Serverless GPU deployment on Modal.com using NVIDIA T4 GPU and FastAPI",
+      "High-performance REST API endpoints for direct image upload, file streams, and Base64 input",
+      "Modern React 18 frontend with real-time confidence scores and probability distributions",
+      "Training optimized with Adam, Categorical Cross-Entropy, EarlyStopping, and ReduceLROnPlateau",
+      "Selected actions: running, climbing, reading, drinking, applauding, waving hands, brushing teeth, riding a bike",
     ],
     techStack: [
-      "TensorFlow 2.18", "Keras", "ResNet50", "LSTM",
-      "FastAPI", "Modal.com", "React", "Python 3.11",
+      "TensorFlow 2.18", "Keras 3.7", "ResNet50", "LSTM",
+      "FastAPI", "Modal.com (T4 GPU)", "React 18", "Python 3.11",
       "Stanford-40 Dataset",
     ],
     githubUrl: "https://github.com/syedmozamilshah/Action-Recognition-using-CNN-and-LSTM",
     liveUrl: "https://syedmozamilsherazi--action-recognition-api-web-app.modal.run",
     accentColor: "#9B59B6",
-    glowColor: "rgba(155,89,182,0.3)",
-    icon: "🎯",
+    glowColor: "rgba(155,89,182,0.25)",
   },
   {
     id: 3,
@@ -72,27 +72,26 @@ const projects = [
     badgeColor: "#E74C3C",
     category: "Full Stack / AI",
     description:
-      "Invite-only YouTube intelligence command center for professional content creators — track channels via RSS/WebSub, generate AI scripts, spy on competitors, and dominate your niche.",
+      "All-in-one YouTube management & intelligence platform for creators — real-time competitor tracking via RSS/WebSub, AI script generation, and analytics.",
     longDescription:
-      "An all-in-one YouTube management platform with real-time RSS polling, WebSub webhooks, AI-powered script/SEO/title generation, competitor analysis, admin dashboards, and role-based access control built on Supabase Edge Functions.",
+      "A private, invite-only intelligence command center designed for professional YouTube content creators and production teams. BlowMe AI centralizes competitor channel monitoring via real-time RSS polling and WebSub webhooks, offers AI-powered scriptwriting, SEO optimization, and title generators, and organizes intelligence into dedicated content buckets with full role-based access control.",
     features: [
-      "Real-time RSS channel tracking with 90-second polling + WebSub webhooks",
-      "AI script generator, SEO optimizer & title generator tools",
-      "Competitor channel finder with 12-hour automated refresh",
-      "3-tab content library: Ideation, USA, Spanish buckets",
-      "Role-based access: regular user, admin (own data), admin (all data)",
-      "Supabase Edge Functions, Stripe integration & admin analytics dashboard",
+      "Real-time channel upload tracking with 90-second RSS polling and YouTube WebSub webhooks",
+      "AI content creation suite: production-ready script generator, SEO metadata optimizer & viral title generator",
+      "Automated competitor finder with background cron jobs refreshing channel metrics every 12 hours",
+      "Three distinct video intelligence curation buckets: Ideation, USA, and Spanish content pipelines",
+      "Role-based access control with Supabase Auth, admin verification queues, and Stripe billing",
+      "Serverless backend powered by Supabase Edge Functions with PostgreSQL real-time subscriptions",
     ],
     techStack: [
       "React", "TypeScript", "Supabase", "Vite",
       "Supabase Edge Functions", "YouTube API", "OpenAI API",
-      "RSS / WebSub", "Stripe", "PostgreSQL",
+      "RSS & WebSub", "PostgreSQL", "Stripe",
     ],
     githubUrl: "https://github.com/syedmozamilshah/yt_management_and_analysis",
     liveUrl: "",
     accentColor: "#E74C3C",
-    glowColor: "rgba(231,76,60,0.3)",
-    icon: "📺",
+    glowColor: "rgba(231,76,60,0.25)",
   },
   {
     id: 4,
@@ -102,23 +101,21 @@ const projects = [
     badgeColor: "#00B2FF",
     category: "AI / Full Stack",
     description:
-      "AI-powered recruitment platform improving job-recruitment alignments by 35% through resume parsing, skill extraction, and intelligent job-matching algorithms.",
+      "AI-powered recruitment platform improving job-recruitment alignment by 35% through automated resume parsing, skill extraction, and candidate matching.",
     longDescription:
-      "A dual-sided platform for job seekers and recruiters. Uses AI to parse resumes, extract skills, and match candidates with relevant roles. Includes an AI-powered recruiter dashboard for tracking candidate pipelines.",
+      "A dual-sided recruitment ecosystem for job seekers and corporate recruiters. Employs natural language processing to parse diverse resume formats, accurately extract candidate competencies, and score alignments against live job specifications. Includes a comprehensive recruiter dashboard for pipeline tracking.",
     features: [
-      "AI-powered resume parsing and skill extraction",
-      "Intelligent job-matching with recommendation vectors",
-      "Recruiter dashboard for tracking and managing candidates",
-      "35% improvement in job-recruitment alignment accuracy",
-      "Real-time job listings with advanced filtering",
-      "User and recruiter role-based access control",
+      "Intelligent resume parsing and automated candidate skill vectorization",
+      "Job-matching algorithm increasing candidate-role alignment by 35%",
+      "AI-driven candidate tracking dashboard with status workflow management",
+      "Full role-based access for applicants and hiring managers",
+      "Real-time job postings with rich search and facet filtering",
     ],
-    techStack: ["React", "Node.js", "MongoDB", "Express", "AI APIs"],
+    techStack: ["React", "Node.js", "MongoDB", "Express", "AI APIs", "JWT"],
     githubUrl: "https://github.com/syedmozamilshah/HireIQ",
     liveUrl: "",
     accentColor: "#00B2FF",
-    glowColor: "rgba(0,178,255,0.3)",
-    icon: "💼",
+    glowColor: "rgba(0,178,255,0.25)",
   },
   {
     id: 5,
@@ -128,23 +125,21 @@ const projects = [
     badgeColor: "#2ECC71",
     category: "AI / Mobile",
     description:
-      "Islamic Emotional Therapy Mobile App providing personalized therapy sessions using Quran, Hadith, and CBT techniques via LangGraph-driven modular therapy flows.",
+      "Islamic emotional therapy mobile app providing personalized healing sessions using Quran, Hadith, and CBT techniques through LangGraph-driven modular flows.",
     longDescription:
-      "A Flutter-based mobile app that offers emotional healing through Islamic teachings. Features a 7-day QalbCare+ healing journey system, personalized recommendations based on emotional state, and LangGraph-driven modular therapy flows.",
+      "A mobile emotional therapy application blending Islamic spiritual teachings with evidence-based Cognitive Behavioral Therapy (CBT). Features the QalbCare+ 7-day healing journey, tailored guidance rooted in user emotional states, and modular conversation graphs powered by LangGraph.",
     features: [
-      "LangGraph-driven modular therapy flow architecture",
-      "QalbCare+ 7-day healing journey system",
-      "Recommendation engine based on user emotional state",
-      "Quran, Hadith & CBT technique integration",
-      "Flutter mobile app for Android and iOS",
-      "Firebase backend with real-time emotional tracking",
+      "LangGraph-driven modular therapy flow architecture for context-rich guidance",
+      "Personalized emotion recommendation system referencing Quranic verses and authentic Hadith",
+      "QalbCare+ structured 7-day progressive emotional healing journey",
+      "Cross-platform mobile application developed with Flutter for iOS and Android",
+      "Secure cloud persistence with Firebase Authentication and Firestore",
     ],
-    techStack: ["Flutter", "Firebase", "LangGraph", "Python", "AI", "Dart"],
+    techStack: ["Flutter", "Dart", "Firebase", "LangGraph", "Python", "AI APIs"],
     githubUrl: "https://github.com/syedmozamilshah/QalbCare",
     liveUrl: "",
     accentColor: "#2ECC71",
-    glowColor: "rgba(46,204,113,0.3)",
-    icon: "💚",
+    glowColor: "rgba(46,204,113,0.25)",
   },
   {
     id: 6,
@@ -154,23 +149,21 @@ const projects = [
     badgeColor: "#F39C12",
     category: "AI / Healthcare",
     description:
-      "AI-Based Prescription Support System helping doctors generate prescriptions through interactive follow-up questioning, automating workflow efficiency by 55%.",
+      "AI-based prescription support system assisting physicians in generating structured prescriptions via interactive follow-up questioning, boosting workflow efficiency by 55%.",
     longDescription:
-      "An AI-powered clinical assistant that guides doctors through a conversational interface to generate precise prescriptions and test recommendations. Built with LLMs to ensure accurate, context-aware medical suggestions.",
+      "A clinical decision-support tool designed to eliminate manual prescription overhead. Doctors interact with an LLM-powered assistant that asks targeted diagnostic follow-up questions, cross-references symptoms, and generates verified prescriptions and lab recommendations.",
     features: [
-      "Conversational AI interface for interactive prescription generation",
-      "LLM-powered follow-up questioning for accurate diagnosis support",
-      "Automated test recommendations with context awareness",
-      "55% improvement in prescription workflow efficiency",
-      "MERN stack with OpenAI integration",
-      "RESTful API architecture for clinical integrations",
+      "Conversational AI interface for interactive physician diagnostic follow-ups",
+      "Automated clinical prescriptions and lab test recommendations via LLM synthesis",
+      "55% improvement in prescription turnaround and administrative workflow efficiency",
+      "Secure medical record persistence on MongoDB with comprehensive audit trails",
+      "Interactive doctor consultation workspace built with React and Node.js",
     ],
-    techStack: ["React", "Node.js", "MongoDB", "Express", "OpenAI"],
+    techStack: ["React", "Node.js", "MongoDB", "Express", "OpenAI API"],
     githubUrl: "https://github.com/syedmozamilshah/Doctra",
     liveUrl: "",
     accentColor: "#F39C12",
-    glowColor: "rgba(243,156,18,0.3)",
-    icon: "🩺",
+    glowColor: "rgba(243,156,18,0.25)",
   },
   {
     id: 7,
@@ -180,155 +173,84 @@ const projects = [
     badgeColor: "#1ABC9C",
     category: "Full Stack",
     description:
-      "MERN Stack web scraper that creates personalized dashboards for job posting, editing, and management with real-time scraping and advanced recommendation vectors.",
+      "MERN stack job marketplace with real-time web scraping, custom management dashboards, and intelligent vector-based recommendation algorithms.",
     longDescription:
-      "A full-stack job board that combines real-time web scraping with manual job listings, delivering a 40% improvement in relevancy. Features an intuitive dashboard for both job seekers and employers with advanced recommendation algorithms.",
+      "An intelligent job discovery portal combining live web scrapers with employer-submitted postings. Provides tailored dashboards for employers to manage vacancies and candidates, with recommendation vector matching that increases listing relevance by 40%.",
     features: [
-      "Real-time web scraping integrated with manual listings",
-      "40% improvement in job listing relevancy",
-      "Advanced job matching using recommendation vectors",
-      "Intuitive dashboard for job seekers and employers",
-      "Full CRUD for job postings with rich filtering",
-      "MERN stack with optimized MongoDB aggregation pipelines",
+      "Real-time web scrapers seamlessly aggregating remote and local job boards",
+      "Intelligent job recommendation vectors enhancing candidate discovery by 40%",
+      "Personalized dashboards for applicants to track submissions and employers to manage listings",
+      "Complete CRUD job management with salary benchmarks, category filters, and location tags",
+      "Optimized MongoDB aggregation pipelines for instant full-text search",
     ],
-    techStack: ["MongoDB", "Express", "React", "Node.js", "Web Scraping"],
+    techStack: ["MongoDB", "Express", "React", "Node.js", "Web Scraping", "REST APIs"],
     githubUrl: "https://github.com/syedmozamilshah/JobKhoji",
     liveUrl: "",
     accentColor: "#1ABC9C",
-    glowColor: "rgba(26,188,156,0.3)",
-    icon: "🔍",
+    glowColor: "rgba(26,188,156,0.25)",
   },
 ];
 
-
-/* ─── Floating Particles ───────────────────────────────────────────── */
-const ParticleField = () => {
-  const particles = Array.from({ length: 30 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 3 + 1,
-    duration: Math.random() * 15 + 10,
-    delay: Math.random() * 5,
-    color: ["#00FFAB", "#00B2FF", "#9B59B6", "#E74C3C"][Math.floor(Math.random() * 4)],
-  }));
-
-  return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full opacity-20"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            background: p.color,
-            boxShadow: `0 0 ${p.size * 4}px ${p.color}`,
-          }}
-          animate={{
-            y: [0, -80, 0],
-            x: [0, Math.random() * 40 - 20, 0],
-            opacity: [0.1, 0.4, 0.1],
-            scale: [1, 1.5, 1],
-          }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-/* ─── 3D Project Card ──────────────────────────────────────────────── */
-const ProjectCard3D = ({ project, index }) => {
-  const [flipped, setFlipped] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const cardRef = useRef(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current || flipped) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    setRotateX(((y - centerY) / centerY) * -8);
-    setRotateY(((x - centerX) / centerX) * 8);
-  };
-
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-    setHovered(false);
-  };
+/* ─── Detail Modal ─────────────────────────────────────────────────── */
+const ProjectModal = ({ project, onClose }) => {
+  if (!project) return null;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60, scale: 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="relative"
-      style={{ perspective: "1000px", height: "480px" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6"
+      style={{
+        background: "rgba(5, 10, 8, 0.85)",
+        backdropFilter: "blur(16px)",
+      }}
     >
       <motion.div
-        ref={cardRef}
+        initial={{ scale: 0.9, y: 30, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.9, y: 30, opacity: 0 }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 md:p-8 border shadow-2xl"
         style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-          transition: flipped
-            ? "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)"
-            : "transform 0.15s ease",
-          transform: flipped
-            ? `rotateY(180deg) rotateX(${rotateX}deg)`
-            : `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-          height: "100%",
-          position: "relative",
+          background: "linear-gradient(145deg, #0d1713 0%, #111a16 50%, #0d1713 100%)",
+          borderColor: `${project.accentColor}50`,
+          boxShadow: `0 25px 60px ${project.glowColor}, 0 0 0 1px ${project.accentColor}30`,
         }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={handleMouseLeave}
       >
-        {/* FRONT */}
-        <div
-          style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            position: "absolute",
-            inset: 0,
-          }}
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-5 right-5 w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors border border-white/10 hover:border-white/30"
+          style={{ background: "rgba(255,255,255,0.05)" }}
+          aria-label="Close modal"
         >
-          <div
-            className="h-full rounded-2xl overflow-hidden border relative cursor-pointer"
-            style={{
-              background: "linear-gradient(135deg, #0d1f18 0%, #111827 50%, #0d1f18 100%)",
-              borderColor: hovered ? project.accentColor : "rgba(255,255,255,0.08)",
-              boxShadow: hovered
-                ? `0 25px 60px ${project.glowColor}, 0 0 0 1px ${project.accentColor}40, inset 0 1px 0 rgba(255,255,255,0.1)`
-                : "0 8px 32px rgba(0,0,0,0.5)",
-              transition: "all 0.3s ease",
-            }}
-            onClick={() => setFlipped(true)}
-          >
-            {/* Glow overlay on hover */}
-            <motion.div
-              className="absolute inset-0 opacity-0 pointer-events-none rounded-2xl"
-              animate={{ opacity: hovered ? 0.05 : 0 }}
-              style={{ background: `radial-gradient(circle at 50% 50%, ${project.accentColor}, transparent 70%)` }}
-            />
+          ✕
+        </button>
 
-            {/* Badge */}
-            <div className="absolute top-4 right-4 z-10">
+        {/* Modal Header */}
+        <div className="flex items-start gap-4 mb-6 pr-12">
+          <div
+            className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
+            style={{
+              background: `${project.accentColor}15`,
+              border: `1px solid ${project.accentColor}40`,
+            }}
+          >
+            {project.emoji}
+          </div>
+          <div>
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <h2
+                className="text-2xl md:text-3xl font-black"
+                style={{ color: project.accentColor }}
+              >
+                {project.title}
+              </h2>
               <span
-                className="text-xs font-bold px-2 py-1 rounded-full"
+                className="text-xs font-bold px-2.5 py-0.5 rounded-full"
                 style={{
                   background: `${project.badgeColor}20`,
                   border: `1px solid ${project.badgeColor}60`,
@@ -338,232 +260,250 @@ const ProjectCard3D = ({ project, index }) => {
                 {project.badge}
               </span>
             </div>
-
-            {/* Header */}
-            <div
-              className="p-6 pb-4"
-              style={{ borderBottom: `1px solid rgba(255,255,255,0.06)` }}
-            >
-              <div className="flex items-start gap-3 mb-3">
-                <motion.span
-                  className="text-4xl"
-                  animate={{ rotate: hovered ? [0, -10, 10, 0] : 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {project.emoji}
-                </motion.span>
-                <div>
-                  <h3
-                    className="text-xl font-bold leading-tight"
-                    style={{ color: project.accentColor, textShadow: `0 0 20px ${project.accentColor}60` }}
-                  >
-                    {project.title}
-                  </h3>
-                  <span className="text-xs text-gray-500 mt-1 block">{project.category}</span>
-                </div>
-              </div>
-              <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
-                {project.description}
-              </p>
-            </div>
-
-            {/* Features preview */}
-            <div className="p-5 flex-1">
-              <p className="text-xs text-gray-500 uppercase tracking-widest mb-3 font-semibold">
-                Key Features
-              </p>
-              <ul className="space-y-2">
-                {project.features.slice(0, 3).map((f, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-gray-400">
-                    <span style={{ color: project.accentColor }} className="mt-0.5 flex-shrink-0">▹</span>
-                    <span className="line-clamp-1">{f}</span>
-                  </li>
-                ))}
-                {project.features.length > 3 && (
-                  <li className="text-xs" style={{ color: project.accentColor }}>
-                    +{project.features.length - 3} more features...
-                  </li>
-                )}
-              </ul>
-            </div>
-
-            {/* Tech Stack */}
-            <div className="px-5 pb-4">
-              <div className="flex flex-wrap gap-1.5">
-                {project.techStack.slice(0, 5).map((t, i) => (
-                  <span
-                    key={i}
-                    className="text-xs px-2 py-0.5 rounded-md font-mono"
-                    style={{
-                      background: `${project.accentColor}15`,
-                      border: `1px solid ${project.accentColor}30`,
-                      color: project.accentColor,
-                    }}
-                  >
-                    {t}
-                  </span>
-                ))}
-                {project.techStack.length > 5 && (
-                  <span className="text-xs px-2 py-0.5 rounded-md text-gray-500 bg-white/5 border border-white/10">
-                    +{project.techStack.length - 5}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Flip hint */}
-            <div className="px-5 pb-5">
-              <motion.div
-                className="flex items-center gap-2 text-xs text-gray-500"
-                animate={{ x: hovered ? [0, 4, 0] : 0 }}
-                transition={{ repeat: hovered ? Infinity : 0, duration: 0.8 }}
-              >
-                <span>Click to see details</span>
-                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </motion.div>
-            </div>
-
-            {/* Corner accent */}
-            <div
-              className="absolute bottom-0 right-0 w-20 h-20 opacity-10 pointer-events-none"
-              style={{
-                background: `radial-gradient(circle at 100% 100%, ${project.accentColor}, transparent 70%)`,
-              }}
-            />
+            <p className="text-xs text-gray-400 font-mono">{project.category}</p>
           </div>
         </div>
 
-        {/* BACK */}
-        <div
-          style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
-            position: "absolute",
-            inset: 0,
-          }}
-        >
-          <div
-            className="h-full rounded-2xl overflow-hidden border flex flex-col"
-            style={{
-              background: "linear-gradient(135deg, #111827 0%, #0d1f18 100%)",
-              borderColor: project.accentColor + "60",
-              boxShadow: `0 25px 60px ${project.glowColor}`,
-            }}
+        {/* Detailed Description */}
+        <div className="mb-6">
+          <h4 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-2">Overview</h4>
+          <p className="text-gray-200 text-sm md:text-base leading-relaxed">
+            {project.longDescription}
+          </p>
+        </div>
+
+        {/* Features List */}
+        <div className="mb-6">
+          <h4
+            className="text-xs font-mono uppercase tracking-widest mb-3"
+            style={{ color: project.accentColor }}
           >
-            <div className="p-5 flex items-center justify-between" style={{ borderBottom: `1px solid ${project.accentColor}20` }}>
-              <h3 className="font-bold text-white flex items-center gap-2">
-                <span>{project.emoji}</span> {project.title}
-              </h3>
-              <button
-                onClick={() => setFlipped(false)}
-                className="text-gray-400 hover:text-white transition-colors text-xs px-2 py-1 rounded border border-white/10 hover:border-white/30"
+            Key Capabilities & Features
+          </h4>
+          <ul className="space-y-2.5">
+            {project.features.map((feature, i) => (
+              <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
+                <span
+                  style={{ color: project.accentColor }}
+                  className="font-bold flex-shrink-0 mt-0.5"
+                >
+                  ▹
+                </span>
+                <span className="leading-relaxed">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Full Tech Stack */}
+        <div className="mb-8">
+          <h4 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-3">
+            Technology Stack & Tools
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {project.techStack.map((tech, i) => (
+              <span
+                key={i}
+                className="text-xs font-mono px-3 py-1 rounded-lg"
+                style={{
+                  background: `${project.accentColor}15`,
+                  border: `1px solid ${project.accentColor}35`,
+                  color: project.accentColor,
+                }}
               >
-                ← Back
-              </button>
-            </div>
-
-            <div className="flex-1 p-5 overflow-y-auto">
-              <p className="text-gray-300 text-sm mb-4 leading-relaxed">{project.longDescription}</p>
-
-              <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: project.accentColor }}>
-                All Features
-              </p>
-              <ul className="space-y-1.5 mb-4">
-                {project.features.map((f, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs text-gray-300">
-                    <span style={{ color: project.accentColor }} className="mt-0.5 flex-shrink-0">▹</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: project.accentColor }}>
-                Full Tech Stack
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {project.techStack.map((t, i) => (
-                  <span
-                    key={i}
-                    className="text-xs px-2 py-0.5 rounded-md font-mono"
-                    style={{
-                      background: `${project.accentColor}15`,
-                      border: `1px solid ${project.accentColor}30`,
-                      color: project.accentColor,
-                    }}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Links */}
-            <div className="p-5 flex gap-3" style={{ borderTop: `1px solid ${project.accentColor}20` }}>
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-                  style={{
-                    background: `${project.accentColor}20`,
-                    border: `1px solid ${project.accentColor}50`,
-                    color: project.accentColor,
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = `${project.accentColor}35`)}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = `${project.accentColor}20`)}
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                  </svg>
-                  GitHub
-                </a>
-              )}
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-200"
-                  style={{
-                    background: `linear-gradient(135deg, ${project.accentColor}60, ${project.accentColor}30)`,
-                    border: `1px solid ${project.accentColor}80`,
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                  Live Demo
-                </a>
-              )}
-            </div>
+                {tech}
+              </span>
+            ))}
           </div>
+        </div>
+
+        {/* Action Links */}
+        <div className="flex flex-wrap gap-4 pt-4 border-t border-white/10">
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-bold text-sm transition-all duration-300"
+              style={{
+                background: `${project.accentColor}20`,
+                border: `1px solid ${project.accentColor}60`,
+                color: project.accentColor,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = `${project.accentColor}35`;
+                e.currentTarget.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = `${project.accentColor}20`;
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              </svg>
+              View on GitHub
+            </a>
+          )}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-bold text-sm text-dark-bg transition-all duration-300"
+              style={{
+                background: `linear-gradient(135deg, ${project.accentColor}, #00B2FF)`,
+                boxShadow: `0 0 25px ${project.glowColor}`,
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              Open Live API
+            </a>
+          )}
         </div>
       </motion.div>
     </motion.div>
   );
 };
 
-/* ─── Stats Banner ─────────────────────────────────────────────────── */
-const stats = [
-  { label: "Projects", value: "7+", icon: "🚀" },
-  { label: "Tech Stacks Used", value: "25+", icon: "⚙️" },
-  { label: "AI/ML Projects", value: "5", icon: "🤖" },
-  { label: "Open Source", value: "7", icon: "🌐" },
-];
+/* ─── 3D Card ──────────────────────────────────────────────────────── */
+const ProjectCard = ({ project, index, onSelect }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      whileHover={{ y: -8, scale: 1.015 }}
+      onClick={() => onSelect(project)}
+      className="relative rounded-3xl p-6 md:p-7 flex flex-col justify-between cursor-pointer border transition-all duration-300 group"
+      style={{
+        background: "linear-gradient(145deg, rgba(16, 26, 21, 0.75) 0%, rgba(13, 19, 16, 0.85) 100%)",
+        borderColor: "rgba(255, 255, 255, 0.08)",
+        backdropFilter: "blur(14px)",
+        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = `${project.accentColor}60`;
+        e.currentTarget.style.boxShadow = `0 20px 45px ${project.glowColor}, 0 0 0 1px ${project.accentColor}30`;
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
+        e.currentTarget.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.4)";
+      }}
+    >
+      {/* Top Bar: Emoji + Badge */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-4xl filter drop-shadow-lg transition-transform duration-300 group-hover:scale-110">
+            {project.emoji}
+          </span>
+          <span
+            className="text-xs font-mono font-bold px-3 py-1 rounded-full"
+            style={{
+              background: `${project.badgeColor}15`,
+              border: `1px solid ${project.badgeColor}40`,
+              color: project.badgeColor,
+            }}
+          >
+            {project.badge}
+          </span>
+        </div>
 
-/* ─── Main Page ────────────────────────────────────────────────────── */
+        {/* Title & Category */}
+        <h3
+          className="text-xl md:text-2xl font-bold mb-1 transition-colors duration-200"
+          style={{ color: project.accentColor }}
+        >
+          {project.title}
+        </h3>
+        <p className="text-xs text-gray-500 font-mono mb-4">{project.category}</p>
+
+        {/* Description - Uncut, clean text */}
+        <p className="text-gray-300 text-sm leading-relaxed mb-5">
+          {project.description}
+        </p>
+
+        {/* Key Features Preview */}
+        <div className="mb-5 space-y-2">
+          {project.features.slice(0, 3).map((f, i) => (
+            <div key={i} className="flex items-start gap-2.5 text-xs text-gray-400">
+              <span style={{ color: project.accentColor }} className="font-bold flex-shrink-0 mt-0.5">
+                ▹
+              </span>
+              <span className="leading-relaxed">{f}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom Section: Tech Stack & Action Button */}
+      <div>
+        {/* Tech Stack Pills */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {project.techStack.slice(0, 5).map((tech, i) => (
+            <span
+              key={i}
+              className="text-xs font-mono px-2.5 py-1 rounded-md"
+              style={{
+                background: `${project.accentColor}12`,
+                border: `1px solid ${project.accentColor}25`,
+                color: project.accentColor,
+              }}
+            >
+              {tech}
+            </span>
+          ))}
+          {project.techStack.length > 5 && (
+            <span className="text-xs font-mono px-2 py-1 rounded-md text-gray-500 bg-white/5 border border-white/10">
+              +{project.techStack.length - 5}
+            </span>
+          )}
+        </div>
+
+        {/* View Details CTA Button */}
+        <div className="flex items-center justify-between pt-4 border-t border-white/5">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect(project);
+            }}
+            className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase transition-all duration-200"
+            style={{ color: project.accentColor }}
+          >
+            <span>View Details & Tech</span>
+            <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+          </button>
+
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="text-gray-400 hover:text-white transition-colors"
+              title="GitHub repository"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              </svg>
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+/* ─── Main Projects Page ───────────────────────────────────────────── */
 const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  const headerY = useTransform(scrollYProgress, [0, 0.3], [0, -50]);
 
   const uniqueCategories = ["All", ...new Set(projects.map((p) => p.category))];
 
@@ -577,104 +517,89 @@ const Projects = () => {
   });
 
   return (
-    <div ref={containerRef} className="relative min-h-screen overflow-hidden" style={{ background: "#0A0F0D" }}>
-      <ParticleField />
+    <div className="relative min-h-screen pt-28 pb-20 px-4 md:px-8">
+      {/* Detail Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </AnimatePresence>
 
-      {/* Radial background blobs */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-5 blur-3xl" style={{ background: "#00FFAB" }} />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-5 blur-3xl" style={{ background: "#00B2FF" }} />
-        <div className="absolute top-3/4 left-1/2 w-64 h-64 rounded-full opacity-5 blur-3xl" style={{ background: "#9B59B6" }} />
-      </div>
-
-      <div className="relative z-10 container mx-auto px-4 py-16 max-w-7xl">
-
-        {/* ─── Hero Header ─── */}
-        <motion.div style={{ y: headerY }} className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <motion.p
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-sm font-mono uppercase tracking-[0.3em] text-neon-blue mb-4"
-            >
-              &lt; Portfolio /&gt;
-            </motion.p>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-6xl md:text-8xl font-black mb-6 leading-none"
-            >
-              <span
-                className="inline-block"
-                style={{
-                  background: "linear-gradient(135deg, #00FFAB 0%, #00B2FF 50%, #9B59B6 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  textShadow: "none",
-                }}
-              >
-                Projects
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-gray-400 text-lg max-w-2xl mx-auto font-mono leading-relaxed"
-            >
-              Building intelligent systems at the intersection of{" "}
-              <span className="text-neon-green">AI</span>,{" "}
-              <span className="text-neon-blue">full-stack</span>, and{" "}
-              <span style={{ color: "#9B59B6" }}>human impact</span>.
-              <br />
-              Click any card to explore details.
-            </motion.p>
-          </motion.div>
-        </motion.div>
-
-        {/* ─── Stats Bar ─── */}
+      <div className="container mx-auto max-w-7xl relative z-10">
+        {/* Header - Fixed line-height and padding so text is never cut off */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-14"
         >
-          {stats.map((s, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05, y: -4 }}
-              className="rounded-2xl p-4 text-center relative overflow-hidden"
+          <p className="text-xs font-mono uppercase tracking-[0.35em] text-neon-blue mb-3">
+            &lt; Innovations & Systems /&gt;
+          </p>
+
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black py-3 leading-tight tracking-tight">
+            <span
+              className="inline-block"
               style={{
-                background: "linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
-                border: "1px solid rgba(255,255,255,0.08)",
-                backdropFilter: "blur(10px)",
+                background: "linear-gradient(135deg, #00FFAB 0%, #00B2FF 50%, #9B59B6 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
               }}
             >
-              <div className="text-2xl mb-1">{s.icon}</div>
-              <div className="text-3xl font-black text-neon-green">{s.value}</div>
-              <div className="text-xs text-gray-500 font-mono uppercase tracking-wider">{s.label}</div>
-            </motion.div>
-          ))}
+              Projects
+            </span>
+          </h1>
+
+          <p className="text-gray-300 text-base md:text-lg max-w-3xl mx-auto font-mono leading-relaxed mt-2">
+            Engineering end-to-end intelligent systems at the intersection of{" "}
+            <span className="text-neon-green font-semibold">Autonomous AI</span>,{" "}
+            <span className="text-neon-blue font-semibold">Full-Stack Cloud Architecture</span>, and{" "}
+            <span style={{ color: "#9B59B6" }} className="font-semibold">Deep Learning</span>.
+          </p>
         </motion.div>
 
-        {/* ─── Filters ─── */}
+        {/* Quick Stats Bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="flex flex-col md:flex-row gap-4 mb-10 items-center"
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
         >
-          {/* Search */}
-          <div className="relative flex-1 max-w-md">
+          {[
+            { label: "Production & Major Projects", value: "7+", icon: "🚀" },
+            { label: "Core AI & LLM Systems", value: "5", icon: "🤖" },
+            { label: "Full Stack Techs", value: "25+", icon: "⚙️" },
+            { label: "Open Source Codebases", value: "7", icon: "🌐" },
+          ].map((stat, i) => (
+            <div
+              key={i}
+              className="rounded-2xl p-4 text-center border"
+              style={{
+                background: "rgba(255, 255, 255, 0.03)",
+                borderColor: "rgba(255, 255, 255, 0.08)",
+                backdropFilter: "blur(10px)",
+              }}
+            >
+              <div className="text-2xl mb-1">{stat.icon}</div>
+              <div className="text-2xl md:text-3xl font-black text-neon-green">{stat.value}</div>
+              <div className="text-xs text-gray-400 font-mono mt-1">{stat.label}</div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Search & Category Filter Controls */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          className="flex flex-col md:flex-row gap-4 mb-10 items-center justify-between"
+        >
+          {/* Search Input */}
+          <div className="relative w-full md:max-w-md">
             <svg
               className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"
               fill="none"
@@ -685,122 +610,71 @@ const Projects = () => {
             </svg>
             <input
               type="text"
-              placeholder="Search projects or technologies..."
+              placeholder="Search by title, stack (e.g. LangGraph, Flutter)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl text-sm font-mono text-gray-300 placeholder-gray-600 outline-none transition-all"
+              className="w-full pl-11 pr-4 py-3 rounded-2xl text-sm font-mono text-gray-200 placeholder-gray-500 outline-none transition-all"
               style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "#e5e7eb",
+                background: "rgba(255, 255, 255, 0.04)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
               }}
-              onFocus={(e) => (e.target.style.borderColor = "#00FFAB60")}
-              onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
+              onFocus={(e) => (e.target.style.borderColor = "#00FFAB80")}
+              onBlur={(e) => (e.target.style.borderColor = "rgba(255, 255, 255, 0.1)")}
             />
           </div>
 
-          {/* Category filters */}
-          <div className="flex flex-wrap gap-2 justify-center">
-            {uniqueCategories.map((cat) => (
-              <motion.button
-                key={cat}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setActiveCategory(cat)}
-                className="px-4 py-2 rounded-full text-xs font-mono font-semibold transition-all duration-200"
+          {/* Categories */}
+          <div className="flex flex-wrap gap-2 justify-center md:justify-end w-full md:w-auto">
+            {uniqueCategories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className="px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all duration-200"
                 style={{
-                  background: activeCategory === cat ? "#00FFAB20" : "rgba(255,255,255,0.04)",
-                  border: activeCategory === cat ? "1px solid #00FFAB60" : "1px solid rgba(255,255,255,0.08)",
-                  color: activeCategory === cat ? "#00FFAB" : "#9ca3af",
+                  background: activeCategory === category ? "#00FFAB22" : "rgba(255,255,255,0.04)",
+                  border: activeCategory === category ? "1px solid #00FFAB80" : "1px solid rgba(255,255,255,0.08)",
+                  color: activeCategory === category ? "#00FFAB" : "#9ca3af",
                 }}
               >
-                {cat}
-              </motion.button>
+                {category}
+              </button>
             ))}
           </div>
         </motion.div>
 
-        {/* ─── Results count ─── */}
-        <motion.p
-          key={filtered.length}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-xs text-gray-600 font-mono mb-6"
-        >
-          Showing {filtered.length} of {projects.length} projects
-        </motion.p>
+        {/* Results Info */}
+        <p className="text-xs text-gray-500 font-mono mb-6">
+          Showing {filtered.length} of {projects.length} projects • Click any card for architectural breakdown
+        </p>
 
-        {/* ─── Project Grid ─── */}
-        <AnimatePresence mode="popLayout">
-          {filtered.length > 0 ? (
-            <motion.div
-              layout
-              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
-            >
-              {filtered.map((project, index) => (
-                <ProjectCard3D key={project.id} project={project} index={index} />
-              ))}
-            </motion.div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center py-24"
-            >
-              <div className="text-6xl mb-4">🔍</div>
-              <p className="text-gray-500 font-mono">No projects match your search.</p>
-              <button
-                onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}
-                className="mt-4 text-neon-green text-sm underline"
-              >
-                Clear filters
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filtered.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              onSelect={setSelectedProject}
+            />
+          ))}
+        </div>
 
-        {/* ─── Footer CTA ─── */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mt-20 text-center"
-        >
-          <div
-            className="inline-block rounded-3xl p-px"
-            style={{ background: "linear-gradient(135deg, #00FFAB, #00B2FF, #9B59B6)" }}
-          >
-            <div
-              className="rounded-3xl px-12 py-10"
-              style={{ background: "#0A0F0D" }}
+        {/* Empty Search State */}
+        {filtered.length === 0 && (
+          <div className="text-center py-20 rounded-3xl border border-white/10" style={{ background: "rgba(255,255,255,0.02)" }}>
+            <span className="text-5xl block mb-3">🔍</span>
+            <p className="text-gray-400 font-mono mb-4">No projects matched your criteria.</p>
+            <button
+              onClick={() => {
+                setSearchQuery("");
+                setActiveCategory("All");
+              }}
+              className="text-neon-green text-sm underline font-mono"
             >
-              <h2 className="text-3xl font-black text-white mb-3">
-                Want to collaborate?
-              </h2>
-              <p className="text-gray-400 font-mono mb-6 text-sm">
-                I'm always open to exciting new projects and opportunities.
-              </p>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-sm transition-all duration-300"
-                style={{
-                  background: "linear-gradient(135deg, #00FFAB, #00B2FF)",
-                  color: "#0A0F0D",
-                  boxShadow: "0 0 30px rgba(0,255,171,0.4)",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 0 50px rgba(0,255,171,0.6)")}
-                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "0 0 30px rgba(0,255,171,0.4)")}
-              >
-                Get In Touch
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-            </div>
+              Reset all filters
+            </button>
           </div>
-        </motion.div>
+        )}
       </div>
     </div>
   );

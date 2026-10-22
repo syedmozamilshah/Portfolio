@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import GlobalStyles from './styles/GlobalStyles';
 import CursorTracker from './components/CursorTracker';
 import TerminalIntro from './components/TerminalIntro';
+import AmbientBackground from './components/AmbientBackground';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Landing from './pages/Landing';
@@ -44,6 +45,7 @@ function App() {
             transition={{ duration: 1 }}
           >
             <Router>
+              <AmbientBackground />
               <Navbar />
               <main className="min-h-screen">
                 <Routes>

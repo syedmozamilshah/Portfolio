@@ -5,179 +5,148 @@ import CodeBlock from '../components/CodeBlock';
 const Publications = () => {
   const codeSnippet = {
     code: `#!/usr/bin/env bash
-# publications_manager.sh
+# publications_registry.sh
 
-class PublicationManager {
-    constructor() {
-        this.publications = [];
-        this.categories = ["Research", "Articles", "Tutorials", "Case Studies"];
-    }
-    
-    addPublication(title, type, status) {
-        const publication = {
-            title: title,
-            type: type,
-            status: status,
-            date: new Date().toISOString().split('T')[0]
-        };
+class PublicationRegistry:
+    def __init__(self):
+        self.author = "Syed Mozamil Shah"
+        self.works = [
+            {"title": "Agent ZERO Build, Run, Automate", "type": "Technical Guide", "topic": "Autonomous AI Agents"},
+            {"title": "The Symphony", "type": "Literary & Philosophy", "topic": "Lyrical Expression"}
+        ]
         
-        this.publications.push(publication);
-        console.log(\`📄 Added: \${title}\`);
-        return publication;
-    }
-    
-    getPublishedWorks() {
-        return this.publications.filter(pub => pub.status === 'published');
-    }
-    
-    generateBibliography() {
-        return this.publications.map(pub => 
-            \`\${pub.title} (\${pub.date}) - \${pub.type}\`
-        ).join('\n');
-    }
-}
+    def summary(self):
+        return f"Published {len(self.works)} distinct volumes bridging AI systems and creative philosophy."
 
-const myPublications = new PublicationManager();
-console.log("Publications system initialized");`,
-    output: "📚 Publication management system ready - Sharing knowledge through writing"
+print(PublicationRegistry().summary())`,
+    output: "📚 Publications loaded: Bridging autonomous AI agent engineering and creative philosophy"
   };
 
-const publications = [
+  const publications = [
     {
       title: "Agent ZERO Build, Run, Automate",
-      type: "Technical Article",
+      type: "Technical Guidebook",
       status: "Published",
-      description: "A comprehensive guide to building autonomous AI agents using modern frameworks and techniques.",
+      accent: "#00FFAB",
+      description: "A comprehensive deep-dive guide to designing, building, and deploying autonomous AI agents using contemporary LLM orchestration frameworks, memory tools, and multi-agent coordination.",
       category: "AI Engineering",
       date: "2025",
       pdfPath: require('../books/Agent ZERO Build, Run, Automate.pdf')
     },
     {
       title: "The Symphony",
-      type: "Poetry Book",
+      type: "Poetry & Philosophy",
       status: "Published",
-      description: "A collection of original poems and haikus exploring themes of life, nature, love, and human experience through lyrical expression.",
+      accent: "#9B59B6",
+      description: "A collection of original poems, reflections, and haikus exploring themes of existence, balance, human emotion, and creative expression through evocative lyrical prose.",
       category: "Literature",
       date: "2025",
       pdfPath: require('../books/The Symphony by Syed Mozamil Shah.pdf')
     }
   ];
 
-  const getStatusColor = (status) => {
-    switch(status) {
-      case 'Published': return 'text-green-400';
-      case 'In Progress': return 'text-yellow-400';
-      case 'Draft': return 'text-blue-400';
-      case 'Planning': return 'text-purple-400';
-      case 'Conceptual': return 'text-gray-400';
-      default: return 'text-gray-400';
-    }
-  };
-
   return (
-    <motion.div 
-      initial={{ y: 10, opacity: 0 }} 
-      animate={{ y: 0, opacity: 1 }} 
-      transition={{ duration: 0.5 }}
-      className="min-h-screen flex flex-col justify-center items-center px-4 pt-20 pb-10"
-    >
-      {/* Code Block - At the top */}
-      <motion.div 
-        className="max-w-4xl mx-auto mb-12 w-full"
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        <div className="text-center mb-6">
-          <h3 className="text-2xl font-bold text-neon-green">publications_manager.sh</h3>
-        </div>
-        <CodeBlock code={codeSnippet.code} output={codeSnippet.output} />
-      </motion.div>
-
-      {/* Header */}
-      <div className="text-center mb-12">
-        <motion.h1 
-          className="text-4xl md:text-5xl font-bold text-neon-blue mb-4"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+    <div className="relative min-h-screen pt-28 pb-16 px-4 md:px-8 z-10">
+      <div className="container mx-auto max-w-6xl">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
         >
-          Publications & Writing
-        </motion.h1>
-        
-        <motion.p 
-          className="text-white max-w-2xl mx-auto mb-8"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          Sharing knowledge through technical articles, tutorials, and research. 
-          Contributing to the developer community with practical insights and innovative solutions.
-        </motion.p>
-      </div>
-
-      {/* Publications Grid */}
-      <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 max-w-4xl w-full"
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-      >
-        {publications.map((publication, index) => (
-          <motion.div 
-            key={index}
-            className="bg-dark-gray border border-neon-green/30 rounded-lg p-6 hover:border-neon-green/60 transition-colors"
-            whileHover={{ y: -5 }}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 * index }}
-          >
-            <div className="flex justify-between items-start mb-3">
-              <span className="text-xs text-neon-green bg-neon-green/20 px-2 py-1 rounded">
-                {publication.category}
-              </span>
-              <span className={`text-xs ${getStatusColor(publication.status)} font-semibold`}>
-                {publication.status}
-              </span>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">{publication.title}</h3>
-            <p className="text-neon-blue mb-2 text-sm font-semibold">{publication.type} • {publication.date}</p>
-            <p className="text-gray-300 mb-4 text-sm leading-relaxed">{publication.description}</p>
-            
-            <div className="border-t border-neon-green/20 pt-3">
-              <p className="text-terminal-green text-xs italic">
-            <a href={publication.pdfPath} target="_blank" rel="noopener noreferrer">📝 Click here to view publication</a>
-              </p>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Writing Philosophy */}
-      <motion.div 
-        className="max-w-3xl mx-auto text-center"
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.0 }}
-      >
-        <h3 className="text-2xl font-bold text-neon-green mb-4">Writing Philosophy</h3>
-        <p className="text-gray-300 mb-6 leading-relaxed">
-          I believe in sharing knowledge through clear, practical writing that bridges the gap between 
-          complex technical concepts and real-world implementation. Each publication aims to provide 
-          actionable insights backed by hands-on experience.
-        </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          {['Technical Accuracy', 'Practical Examples', 'Clear Explanations', 'Community Impact'].map((principle, index) => (
-            <span 
-              key={index} 
-              className="bg-neon-green/20 text-neon-green px-3 py-1 rounded-full text-sm"
+          <p className="text-xs font-mono uppercase tracking-[0.35em] text-neon-blue mb-3">
+            &lt; Writing & Thought Leadership /&gt;
+          </p>
+          <h1 className="text-5xl md:text-7xl font-black py-2 leading-tight tracking-tight">
+            <span
+              className="inline-block"
+              style={{
+                background: "linear-gradient(135deg, #00FFAB 0%, #00B2FF 50%, #9B59B6 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
             >
-              {principle}
+              Publications & Books
             </span>
+          </h1>
+          <p className="text-gray-300 font-mono text-sm md:text-base max-w-2xl mx-auto mt-2">
+            Authored literature bridging technical artificial intelligence architectures and creative human philosophies.
+          </p>
+        </motion.div>
+
+        {/* Code Block */}
+        <motion.div 
+          className="max-w-3xl mx-auto mb-14 w-full"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="text-center mb-4">
+            <h3 className="text-lg font-bold font-mono text-neon-green">publications_registry.sh</h3>
+          </div>
+          <CodeBlock code={codeSnippet.code} output={codeSnippet.output} />
+        </motion.div>
+
+        {/* 3D Publications Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {publications.map((pub, index) => (
+            <motion.div 
+              key={index}
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              onClick={() => {
+                if (pub.pdfPath) {
+                  window.open(pub.pdfPath, '_blank');
+                }
+              }}
+              className="rounded-3xl p-6 md:p-8 border cursor-pointer flex flex-col justify-between transition-all duration-300 group"
+              style={{
+                background: "linear-gradient(145deg, rgba(16, 26, 21, 0.75) 0%, rgba(13, 19, 16, 0.85) 100%)",
+                borderColor: `${pub.accent}40`,
+                boxShadow: `0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px ${pub.accent}15`,
+                backdropFilter: "blur(14px)",
+              }}
+            >
+              <div>
+                <div className="flex justify-between items-start mb-4">
+                  <span 
+                    className="text-xs font-mono font-bold px-3 py-1 rounded-full"
+                    style={{
+                      background: `${pub.accent}15`,
+                      border: `1px solid ${pub.accent}35`,
+                      color: pub.accent,
+                    }}
+                  >
+                    {pub.category}
+                  </span>
+                  <span className="text-xs text-gray-500 font-mono">{pub.date}</span>
+                </div>
+
+                <h3 className="text-2xl font-black text-white mb-2 group-hover:text-neon-green transition-colors">
+                  {pub.title}
+                </h3>
+                <p className="text-xs font-mono mb-4 text-neon-blue font-semibold">{pub.type}</p>
+                <p className="text-gray-300 text-sm leading-relaxed mb-6">
+                  {pub.description}
+                </p>
+              </div>
+
+              <div 
+                className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono font-bold"
+                style={{ color: pub.accent }}
+              >
+                <span>Read Official PDF</span>
+                <span className="transition-transform duration-200 group-hover:translate-x-1.5">↗</span>
+              </div>
+            </motion.div>
           ))}
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
