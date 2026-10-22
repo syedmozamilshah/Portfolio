@@ -9,7 +9,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Landing from './pages/Landing';
 import Projects from './pages/Projects';
-import Resume from './pages/Resume';
+import Experience from './pages/Experience';
 import Contact from './pages/Contact';
 import Blogs from './pages/Blogs';
 import Certifications from './pages/Certifications';
@@ -55,7 +55,8 @@ function App() {
                   <Route path="/achievements" element={<Achievements />} />
                   <Route path="/skills" element={<Skills />} />
                   <Route path="/publications" element={<Publications />} />
-                  <Route path="/resume" element={<Resume />} />
+                  <Route path="/experience" element={<Experience />} />
+                  <Route path="/resume" element={<Experience />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/blogs" element={<Blogs />} />
                 </Routes>

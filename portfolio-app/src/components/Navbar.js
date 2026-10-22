@@ -17,12 +17,17 @@ const Navbar = () => {
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => {
+    if (path === '/experience') {
+      return location.pathname === '/experience' || location.pathname === '/resume';
+    }
+    return location.pathname === path;
+  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Projects', path: '/projects' },
-    { name: 'Experience & Resume', path: '/resume' },
+    { name: 'Experience', path: '/experience' },
     { name: 'Certifications', path: '/certifications' },
     { name: 'Achievements', path: '/achievements' },
     { name: 'Skills', path: '/skills' },

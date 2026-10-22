@@ -121,7 +121,7 @@ print(build_future())`,
                 <span>→</span>
               </Link>
               <Link 
-                to="/resume"
+                to="/experience"
                 className="px-8 py-3.5 border rounded-2xl font-bold text-gray-300 hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
                 style={{
                   background: "rgba(255, 255, 255, 0.03)",
@@ -255,7 +255,7 @@ print(build_future())`,
         </ul>
 
         <div className="flex justify-end">
-          <Link to="/resume" className="text-xs font-mono text-neon-blue hover:text-neon-green transition-colors">
+          <Link to="/experience" className="text-xs font-mono text-neon-blue hover:text-neon-green transition-colors">
             View Full Experience & Details →
           </Link>
         </div>
